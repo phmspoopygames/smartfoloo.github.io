@@ -1,0 +1,163 @@
+<!doctype html>
+
+<html lang="en-us">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Bloxorz 2</title>
+<link rel="stylesheet" href="TemplateData/style.css">
+<script src="TemplateData/UnityProgress.js"></script>
+<script src="jquery.min.js"></script>
+</head>
+<body>
+<script src="swfobject.js"></script>
+<script>
+        function goto(url)
+        {
+          console.log("goto " + url);
+          window.open(url);
+        }
+      
+        function login() 
+        {
+            console.log("index.html::login");
+            
+            /*try 
+            {
+              MC.login(function(response) 
+              {
+                console.log("MC.login::");
+                console.log(response);
+        
+                if ( response.auth != undefined && response.auth != null)
+                {
+                  console.log(response.auth);
+                  
+                  if ( response.auth.user_id != null && response.auth.user_id != undefined)
+                  {
+                    console.log(response.auth.user_id);
+                    window.SendMessage("_SG_Miniclip", "SetUserId", "" + response.auth.user_id);
+                    window.SendMessage("_SG_Miniclip", "SetUserData", response.auth.nickname);
+                  }
+                  else
+                  {
+                    console.log("user_id was undefined");	
+                    window.SendMessage("_SG_Miniclip", "LoginFailed");
+                  }
+                }
+                else
+                {
+                  console.log("auth was undefined");
+                  window.SendMessage("_SG_Miniclip", "LoginFailed");
+                }
+              });
+              
+              window.SendMessage("_SG_Miniclip", "LoginFailed");
+            }
+            catch(err)
+            {
+              console.log("MC.login::ERROR " + err.message);
+              window.SendMessage("_SG_Miniclip", "LoginFailed");
+            }*/
+        }
+
+          function showScore(_level)
+          {
+            console.log("Leaderboard::showScore : " + _level);
+
+            /*var showCallback = 
+              function(code)
+              {
+                console.log("Leaderboard::showScore Returned : " + code);
+              };
+
+            MC.Leaderboard.show(_level, showCallback);*/
+          }
+
+          function saveScore(_level, _score)
+          {
+            console.log("Leaderboard::saveScore : " + _level + " " + _score);
+
+            /*var responseCallback = 
+              function(response)
+              {
+                console.log("Leaderboard::saveScore Returned : " + response);
+
+                var debugResponse = {};
+                debugResponse.success = true;
+                debugResponse.is_highscore = false; 
+                debugResponse.message = "";
+                debugResponse.awards = {};
+
+                //window.SendMessage("_SG_Miniclip", "ShowResponse", JSON.stringify(response));
+
+                showScore(_level);
+              };
+
+            MC.Leaderboard.saveScore({ level: _level, score: _score}, responseCallback);*/
+          }
+
+
+          function httpGetAsync(theUrl, callback)
+          {
+            console.log("MC::httpGetAsync " + theUrl);
+      
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function() 
+            { 
+              if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+              {
+                callback(xmlHttp.responseText);
+              }
+            }
+      
+            xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+            xmlHttp.send(null);
+          }
+        </script>
+<script id="miniclip-js">
+          window.mcAsyncInit = function() 
+          {
+            MC.init(
+            {
+              app_id: 98,
+              modules: ['Leaderboard']
+            });
+            MC.resize();
+            
+            console.log("Miniclip - Init");
+          };        
+        </script>
+<div id="flashCommsWrapper"></div>
+<script>
+          (function(d, s, id)
+          {
+            var js, mcjs = d.getElementById('miniclip-js');
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = '//static.miniclipcdn.com/js/mc.js';
+            mcjs.parentNode.insertBefore(js, mcjs);
+          }(document, 'script', 'miniclip-jssdk'));
+        </script>
+<div id="splashWrapper">
+<img id="bar" src="TemplateData/loading.png" />
+<img id="barMask" src="TemplateData/loadingmask.png" />
+</div>
+<canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="768px" width="1024px"></canvas>
+<script type='text/javascript'>
+  var Module = {
+    TOTAL_MEMORY: 536870912,
+    errorhandler: null,			// arguments: err, url, line. This function must return 'true' if the error is handled, otherwise 'false'
+    compatibilitycheck: null,
+    backgroundColor: "#000000",
+    splashStyle: "Light",
+    dataUrl: "Release/Build.data",
+    codeUrl: "Release/Build.js",
+    asmUrl: "Release/Build.asm.js",
+    memUrl: "Release/Build.mem",
+  };
+</script>
+<script src="Release/UnityLoader.js"></script>
+<!--<script src="harness.js"></script>-->
+</body>
+</html>
