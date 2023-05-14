@@ -3381,68 +3381,6 @@
                 this.adsManager.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR, this.onAdError, !1, this), [n.AD_PROGRESS, n.ALL_ADS_COMPLETED, n.CLICK, n.COMPLETE, n.IMPRESSION, n.PAUSED, n.SKIPPED, n.STARTED, n.USER_CLOSE, n.AD_BUFFERING].forEach((function(n) {
                     t.adsManager.addEventListener(n, t.onAdEvent, !1, t)
                 }))
-            }, t.prototype.onAdEvent = function(t) {
-                var n = this,
-                    e = t.getAd();
-                switch (t.type) {
-                    case google.ima.AdEvent.Type.AD_PROGRESS:
-                        f.dispatchEvent(A.ads.video.progress, t.getAdData());
-                        break;
-                    case google.ima.AdEvent.Type.STARTED:
-                        t.remainingTime = this.adsManager.getRemainingTime(), t.remainingTime <= 0 && (t.remainingTime = 15), e.isLinear() || (this.bannerTimeout = window.setTimeout((function() {
-                            f.dispatchEvent(A.ads.completed, {
-                                rewardAllowed: !!t.rewardAllowed
-                            }), n.tearDown()
-                        }), 1e3 * (t.remainingTime + 1))), f.dispatchEvent(A.ads.started, {
-                            creativeId: e.getCreativeId(),
-                            adId: e.getAdId(),
-                            duration: e.getDuration()
-                        });
-                        break;
-                    case google.ima.AdEvent.Type.COMPLETE:
-                        f.dispatchEvent(A.ads.completed, {
-                            rewardAllowed: !0
-                        }), this.tearDown();
-                        break;
-                    case google.ima.AdEvent.Type.ALL_ADS_COMPLETED:
-                    case google.ima.AdEvent.Type.USER_CLOSE:
-                        this.tearDown();
-                        break;
-                    case google.ima.AdEvent.Type.PAUSED:
-                        this.adsManager.pause(), f.dispatchEvent(A.ads.video.paused);
-                        break;
-                    case google.ima.AdEvent.Type.AD_BUFFERING:
-                        f.dispatchEvent(A.ads.video.buffering);
-                        break;
-                    case google.ima.AdEvent.Type.CLICK:
-                        f.dispatchEvent(A.ads.video.clicked);
-                        break;
-                    case google.ima.AdEvent.Type.SKIPPED:
-                        f.dispatchEvent(A.ads.skipped), f.dispatchEvent(A.ads.completed), document.activeElement && document.activeElement.blur();
-                        break;
-                    case google.ima.AdEvent.Type.IMPRESSION:
-                        f.dispatchEvent(A.ads.impression, {
-                            userValueIndicator: Z(f.getDataAnnotations().position === A.ads.position.rewarded ? "rewarded" : "video")
-                        })
-                }
-            }, t.prototype.onAdLoaderError = function(t) {
-                this.tearDown();
-                var n = t.getError && t.getError().toString() || "Unknown";
-                f.dispatchEvent(A.ads.video.loaderError, {
-                    message: n
-                })
-            }, t.prototype.onAdError = function(t) {
-                this.tearDown();
-                var n = t.getError && t.getError().toString() || "Unknown";
-                f.dispatchEvent(A.ads.video.error, {
-                    message: n
-                })
-            }, t.prototype.muteAd = function() {
-                void 0 !== this.adsManager && null != this.adsManager && this.adsManager.setVolume(0)
-            }, t.prototype.isAdRunning = function() {
-                return this.runningAd
-            }, t
-        }(),
         et = function(t) {
             return new Promise((function(n, e) {
                 var i = document.createElement("script");
