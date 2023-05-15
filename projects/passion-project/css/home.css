@@ -12,7 +12,7 @@ body {
   color: #FFFFFF;
   margin: 20px;
   text-align: left;
-  background: url(/projects/passion-project/wallpaper.png)
+  background: url(/projects/passion-project/wallpaper.png);
   background-size: cover;
   background-repeat: no-repeat;
 }
