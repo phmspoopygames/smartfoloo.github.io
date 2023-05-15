@@ -24,39 +24,17 @@ nav .content{
   display: flex;
   align-items: center;
 }
-nav .content .links{
-  margin-left: 80px;
-  position: absolute;
-  right: 30px;
-  display: flex;
-}
+
 .content .logo a{
   color: #fff;
   font-size: 25px;
-  font-weight: 600;
+  font-weight: 400;
   font-family: 'Rubik Glitch';
 }
 .content .links li{
   list-style: none;
   line-height: 70px;
 }
-.content .links li a,
-.content .links li label{
-  color: #fff;
-  font-size: 18px;
-  font-weight: 500;
-  padding: 9px 17px;
-  border-radius: 5px;
-  transition: all 0.3s ease;
-}
-.content .links li label{
-  display: none;
-}
-.content .links li a:hover,
-.content .links li label:hover{
-  background: #283d63;
-}
-.wrapper .search-icon,
 .wrapper .menu-icon{
   color: #fff;
   font-size: 18px;
